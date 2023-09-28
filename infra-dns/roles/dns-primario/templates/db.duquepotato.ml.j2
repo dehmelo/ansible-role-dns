@@ -1,0 +1,42 @@
+{{ ansible_managed }}
+
+{% block head %}
+$TTL {{ ttl|default('300') }} ; 5 minutes
+
+@	IN	SOA	{{ soa|default('soa.duquepotato.ml') }}.	root.{{ domain | default('duquepotato.ml') }}. (
+			{{ '%Y%m%d'|strftime }}{{ id_serial }} ; serial
+			{{ refresh|default('3600') }} ; refresh (1 hour)
+			{{ retry|default('3600') }} ; retry (1 hour)
+			{{ expire|default('604800') }} ; expire (1 week)
+			{{ minimum|default('3600') }} ) ; minimum (1 hour)
+{% endblock %}
+
+
+{% block header_records %}
+; Configuração de Nameserver
+{% for record in item.ns|default([]) %}
+            IN      NS      {{ record.name }}.
+{% endfor %}
+{% endblock %}
+
+
+{% macro record(objs) -%}
+
+{% for (descricao, iname) in objs  %}
+; {{ descricao }}
+{% for record in item[iname]|default([]) %}
+{{"%-30s" % record.name }}	IN		{{ record.type|default('A') }}      {{ record.value }}   {{ record.description|default('') }}
+{% endfor %}
+
+{% endfor %}
+
+{%- endmacro %}
+
+{{ record([
+("DNS", "dns"),
+("Banco de Dados", "database"),
+("Email", "mail"),
+("Firewall | VPN", "firewall"),
+("Aplicacoes Internas", "aplicacoes"),
+])}}
+

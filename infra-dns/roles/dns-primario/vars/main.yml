@@ -1,0 +1,100 @@
+---        
+# general vars
+bind_dependencies:
+  - bind9utils
+  - bind9-doc
+  - dnsutils
+  - resolvconf
+  
+dns_conf: /etc/bind
+
+# template named.conf.local.j2 and tasks files
+domain: duquepotato.ml
+type_master: master
+file_zone: db.{{ domain }}
+ip_master: 192.168.56.10
+ip_slave: 192.168.56.20
+notification: yes
+
+# template named.conf.options.j2
+dns_data: /var/cache/bind
+forwarder_pub1: 8.8.8.8
+forwarder_pub2: 1.1.1.1
+listen_v6: any
+recursion: 127.0.0.1; 192.168.56.0/24; any
+query: 127.0.0.1; 192.168.56.0/24; any
+
+## template db.duquepotato.ml.j2
+id_serial: "01" #O Padrão é ANO-MES-DIA-ID - Ex: 2022123101
+soa: ns1.{{ domain }}
+dns_zone:
+  - name: duquepotato.ml
+    ns:
+      - name: ns1.{{ domain }}
+    dns:
+      - name: ns1
+        value: 192.168.56.10
+        description: ; DNS Master | ns1.duquepotato.ml
+      - name: ns2
+        value: 192.168.56.20
+        description: ; DNS Slave  | ns2.duquepotato.ml
+      - name: dns
+        type: CNAME
+        value: ns1
+        description: ; DNS Master | dns.duquepotato.ml
+      - name: dns-replica
+        type: CNAME
+        value: ns2
+        description: ; DNS Slave | dns-replica.duquepotato.ml
+
+    database:
+      - name: mysql
+        value: 192.168.56.30
+        description: ; mysql.duquepotato.ml
+
+    mail:
+      - name: imap
+        type: CNAME
+        value: webmail
+        description: ; imap.duquepotato.ml
+      - name: pop
+        type: CNAME
+        value: webmail
+        description: ; pop.duquepotato.ml
+      - name: smtp
+        type: CNAME
+        value: webmail
+        description: ; smtp.duquepotato.ml
+      - name: webmail
+        type: A
+        value: 192.168.56.40
+        description: ; webmail.duquepotato.ml
+
+    firewall:
+     - name: pfsense
+       value: 192.168.56.50
+       description: ; pfSense.duquepotato.ml
+     - name: vpn
+       value: 192.168.56.51
+       description: ; vpn.duquepotato.ml
+
+    aplicacoes:
+       - name: blog
+         value: 192.168.56.60
+         description: ; blog.duquepotato.ml
+       - name: www
+         value: 192.168.56.61
+         description: ; www.duquepotato.ml
+       - name: chat
+         value: 192.168.56.70
+         description: ; chat.duquepotato.ml
+       - name: rundeck
+         value: 172.27.11.10
+         description: ; rundeck.duquepotato.ml
+       - name: gitlab
+         value: 192.168.56.80
+         description: ; gitlab.duquepotato.ml
+       - name: jenkins
+         value: 172.27.11.10
+         description: ; jenkins.duquepotato.ml
+

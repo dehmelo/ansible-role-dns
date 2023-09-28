@@ -1,0 +1,8 @@
+---
+- name: Adicionando Configuração Default
+  template:
+    src: named.conf.local.j2
+    dest: "{{ dns_conf }}/named.conf.local"
+  notify: 
+    -  restart-dns
+

@@ -1,0 +1,9 @@
+---
+- name: restart-dns
+  service:
+    name: "bind9"
+    state: restarted
+
+- name: rndc-reload
+  command:
+    cmd: rndc reload

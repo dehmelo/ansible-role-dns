@@ -1,0 +1,7 @@
+zone "{{ domain }}" {
+	type {{ type_slave }};
+	file "{{ dns_data }}/{{ file_zone }}";
+	masters { {{ masters }}; };
+	allow-transfer { {{ transfer_slave }}; };
+};
+

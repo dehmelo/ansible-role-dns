@@ -1,0 +1,30 @@
+---
+- name: Adicionando Configuração Local
+  template:
+    src: named.conf.local.j2
+    dest: "{{ dns_conf }}/named.conf.local"
+
+- name: Adicionando Opções de Configurações 
+  template:
+    src: named.conf.options.j2
+    dest: "{{ dns_conf }}/named.conf.options"
+  notify: 
+    - restart-dns
+
+- name: Validando se Arquivo de Zona existe
+  stat: 
+    path: "{{ dns_data }}/{{ file_zone }}"
+  register: check_zone_files
+
+- name: Criando Arquivo de Zona para o Dominio 
+  template:
+    src: db.duquepotato.ml.j2
+    dest: "{{ dns_data }}/{{ file_zone }}"
+    owner: root
+    group: root
+    mode: 0644
+    validate: "named-checkzone {{ domain }} %s"   
+  loop: "{{ dns_zone }}"
+  when: not check_zone_files.stat.exists
+  notify:
+    - rndc-reload

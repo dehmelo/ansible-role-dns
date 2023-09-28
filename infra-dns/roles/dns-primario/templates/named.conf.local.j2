@@ -1,0 +1,7 @@
+zone "{{ domain }}" {
+    type {{ type_master }};
+    file "{{ file_zone }}";
+    allow-transfer { {{ ip_slave }}; };
+    notify {{ notification }};
+    also-notify { {{ ip_slave }}; };
+};

@@ -1,0 +1,10 @@
+---
+- hosts: main
+  roles:
+    - dns-primario
+  tags: [dns]
+
+- hosts: replica
+  roles:
+    - dns-secundario
+  tags: [dns]

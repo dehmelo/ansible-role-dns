@@ -1,0 +1,22 @@
+---
+- name: Configurando Hostname
+  hostname:
+    name: dns.duquepotato.ml
+
+- name: Instalando possiveis Dependencias
+  apt:
+    name: "{{ bind_dependencies }}"
+    state: present
+    update_cache: yes
+
+- name: Instalando o Bind9
+  package: 
+    name: bind9
+    state: present
+
+- name: Garantindo Inicialização do Bind9
+  service:
+    name: bind9
+    state: started
+    enabled: yes
+

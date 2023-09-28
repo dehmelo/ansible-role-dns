@@ -1,0 +1,7 @@
+---
+- name: Instalando o Bind9
+  import_tasks: install.yml
+
+- name: Iniciando Configuração da Zona Slave
+  import_tasks: zones-slave.yml
+

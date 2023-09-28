@@ -1,0 +1,6 @@
+---
+- name: Instalando o Bind9
+  import_tasks: install.yml
+
+- name: Iniciando Configuração da Zona Master
+  import_tasks: zones-master.yml

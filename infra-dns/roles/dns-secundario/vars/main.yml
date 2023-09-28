@@ -1,0 +1,18 @@
+---                                                                     
+# general vars
+bind_dependencies:
+   - bind9utils
+   - bind9-doc
+   - dnsutils
+
+  
+dns_conf: /etc/bind
+
+# template named.conf.local.j2 and tasks files
+domain: duquepotato.ml
+type_slave: slave
+dns_data: /var/cache/bind
+file_zone: db.{{ domain }}
+masters: 192.168.56.10
+transfer_slave: none
+ 
