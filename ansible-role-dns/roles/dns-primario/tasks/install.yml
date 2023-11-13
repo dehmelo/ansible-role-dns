@@ -1,7 +1,7 @@
 ---
 - name: Configurando Hostname
   hostname:
-    name: dns.duquepotato.ml
+    name: dns.duquepotato.tec
 
 - name: Instalando possiveis Dependencias
   apt:
