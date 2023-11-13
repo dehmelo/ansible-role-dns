@@ -15,12 +15,12 @@ ns1			       		IN	  	A         192.168.56.10		; DNS Master | ns1.duquepotato.tec
 ns2			      		IN	  	A	  	  192.168.56.20		; DNS Slave  | ns2.duquepotato.tec
 dns			       		IN	  	CNAME	  ns1			    ; DNS Master | dns.duquepotato.tec 
 dns-replica		     	IN	  	CNAME	  ns2			    ; DNS Slave  | dns-replica.duquepotato.tec
-mysql			        IN  	A	  	  192.168.56.30		; mysql
+database			        IN  	A	  	  192.168.56.30		; database.duquepotato.tec 
 imap			        IN	  	CNAME	  webmail			; imap.duquepotato.tec
 pop			            IN	  	CNAME	  webmail			; pop.duquepotato.tec
 smtp			        IN	  	CNAME	  webmail			; smtp.duquepotato.tec 
 webmail			        IN	  	A		  192.168.56.40	    ; webmail.duquepotato.tec
-pfsense			        IN	  	A	      192.168.56.50		; pfSense
+pfsense			        IN	  	A	      192.168.56.50		; pfsense.duquepotato.tec 
 vpn			            IN	  	A	  	  192.168.56.51     ; vpn.duquepotato.tec
 blog			        IN  	A	      192.168.56.60		; blog.duquepotato.tec
 chat			        IN	  	A	      192.168.56.70		; chat.duquepotato.tec 
