@@ -18,7 +18,7 @@
 
 - name: Criando Arquivo de Zona para o Dominio 
   template:
-    src: db.duquepotato.ml.j2
+    src: db.duquepotato.tec.j2
     dest: "{{ dns_data }}/{{ file_zone }}"
     owner: root
     group: root
