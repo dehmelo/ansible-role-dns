@@ -9,7 +9,7 @@ bind_dependencies:
 dns_conf: /etc/bind
 
 # template named.conf.local.j2 and tasks files
-domain: duquepotato.ml
+domain: duquepotato.tec
 type_master: master
 file_zone: db.{{ domain }}
 ip_master: 192.168.56.10
@@ -24,47 +24,47 @@ listen_v6: any
 recursion: 127.0.0.1; 192.168.56.0/24; any
 query: 127.0.0.1; 192.168.56.0/24; any
 
-## template db.duquepotato.ml.j2
+## template db.duquepotato.tec.j2
 id_serial: "01" #O Padrão é ANO-MES-DIA-ID - Ex: 2022123101
 soa: ns1.{{ domain }}
 dns_zone:
-  - name: duquepotato.ml
+  - name: duquepotato.tec
     ns:
       - name: ns1.{{ domain }}
     dns:
       - name: ns1
         value: 192.168.56.10
-        description: ; DNS Master | ns1.duquepotato.ml
+        description: ; DNS Master | ns1.duquepotato.tec
       - name: ns2
         value: 192.168.56.20
-        description: ; DNS Slave  | ns2.duquepotato.ml
+        description: ; DNS Slave  | ns2.duquepotato.tec
       - name: dns
         type: CNAME
         value: ns1
-        description: ; DNS Master | dns.duquepotato.ml
+        description: ; DNS Master | dns.duquepotato.tec
       - name: dns-replica
         type: CNAME
         value: ns2
-        description: ; DNS Slave | dns-replica.duquepotato.ml
+        description: ; DNS Slave | dns-replica.duquepotato.tec
 
     database:
       - name: mysql
         value: 192.168.56.30
-        description: ; mysql.duquepotato.ml
+        description: ; mysql.duquepotato.tec
 
     mail:
       - name: imap
         type: CNAME
         value: webmail
-        description: ; imap.duquepotato.ml
+        description: ; imap.duquepotato.tec
       - name: pop
         type: CNAME
         value: webmail
-        description: ; pop.duquepotato.ml
+        description: ; pop.duquepotato.tec
       - name: smtp
         type: CNAME
         value: webmail
-        description: ; smtp.duquepotato.ml
+        description: ; smtp.duquepotato.tec
       - name: webmail
         type: A
         value: 192.168.56.40
@@ -73,28 +73,28 @@ dns_zone:
     firewall:
      - name: pfsense
        value: 192.168.56.50
-       description: ; pfSense.duquepotato.ml
+       description: ; pfSense.duquepotato.tec
      - name: vpn
        value: 192.168.56.51
-       description: ; vpn.duquepotato.ml
+       description: ; vpn.duquepotato.tec
 
     aplicacoes:
        - name: blog
          value: 192.168.56.60
-         description: ; blog.duquepotato.ml
+         description: ; blog.duquepotato.tec
        - name: www
          value: 192.168.56.61
-         description: ; www.duquepotato.ml
+         description: ; www.duquepotato.tec
        - name: chat
          value: 192.168.56.70
-         description: ; chat.duquepotato.ml
+         description: ; chat.duquepotato.tec
        - name: rundeck
          value: 172.27.11.10
-         description: ; rundeck.duquepotato.ml
+         description: ; rundeck.duquepotato.tec
        - name: gitlab
          value: 192.168.56.80
-         description: ; gitlab.duquepotato.ml
+         description: ; gitlab.duquepotato.tec
        - name: jenkins
          value: 172.27.11.10
-         description: ; jenkins.duquepotato.ml
+         description: ; jenkins.duquepotato.tec
 
