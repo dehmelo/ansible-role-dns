@@ -9,7 +9,7 @@ bind_dependencies:
 dns_conf: /etc/bind
 
 # template named.conf.local.j2 and tasks files
-domain: duquepotato.ml
+domain: duquepotato.tec
 type_slave: slave
 dns_data: /var/cache/bind
 file_zone: db.{{ domain }}
