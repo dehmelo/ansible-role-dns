@@ -48,9 +48,9 @@ dns_zone:
         description: ; DNS Slave | dns-replica.duquepotato.tec
 
     database:
-      - name: mysql
+      - name: database
         value: 192.168.56.30
-        description: ; mysql.duquepotato.tec
+        description: ; database.duquepotato.tec
 
     mail:
       - name: imap
@@ -73,7 +73,7 @@ dns_zone:
     firewall:
      - name: pfsense
        value: 192.168.56.50
-       description: ; pfSense.duquepotato.tec
+       description: ; pfsense.duquepotato.tec
      - name: vpn
        value: 192.168.56.51
        description: ; vpn.duquepotato.tec
